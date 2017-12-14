@@ -188,7 +188,7 @@ int show(String command)   // when "shower" is called from the cloud, it will
         reachedReqTempState = FALSE; //flag for whether the appropriate temperature was reached
         return 3;                   // return a status of "3"
     }
-    else if(command == "off_shower")     // if the string is "alarm",
+    else if(command == "off_shower") 
     {                               
         //visually indicate command received        
         digitalWrite(boardLed,HIGH);
@@ -214,7 +214,7 @@ int show(String command)   // when "shower" is called from the cloud, it will
         // Serial.println(instruction);
         
         myservo.write(10);      // turn shower off
-        return 4;                // returning "an int"4" to meet requirements but under the statusRead schema, this would be a 0
+        return 4;                // returning an int "4" to meet requirements but under the statusRead schema, this would be a 0
     }
 }
 

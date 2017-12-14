@@ -1,21 +1,16 @@
-﻿// This #include statement was automatically added by the Particle IDE.
-// #include <Adafruit_BLE.h> //<<<<<<<<<<<
-
+﻿
 // This #include statement was automatically added by the Particle IDE.
 #include <OneWire.h>
 
 // This #include statement was automatically added by the Particle IDE.
+// This is the file edited to allow it to recongnize the OneWire library
 #include "spark-dallas-temperature.h"
 
 
 
-// Define important global variables
-// int calc = 1;               // initiate state variable that determines if calculating in deg C or F
-// int fake_temp = 23;         // fake temperatuer in celcius
+const String key = "###";//ThingsSpeak write API
 
-const String key = "UGC30GYNIVGM60UY";//ThingsSpeak write API
-
-//UW_Defining some global variables for the temperatures readings... might not use all of these
+//Defining some global variables for the temperatures readings
 int led = D0; // This is where your LED is plugged in. The other side goes to a resistor connected to GND.
 int boardLed = D7; // This is the LED that is already on your device.
 int photoresistor = A0; // This is where your photoresistor is plugged in. The other side goes to the "power" pin (below).
@@ -27,6 +22,8 @@ bool beamIntactState = TRUE;
 int instruction = 0;//intialized at so that shower is off when the loop begins
 int statusRead = 0; //mirrors the instruction for now;
 //keeping separate from instruction as this is more appropriately considered a reading of system while that is a write to the system   
+
+
 //----------------
 // Servo variables
 // ---------------
@@ -151,7 +148,7 @@ int show(String command)   // when "shower" is called from the cloud, it will
     {                               
         for (int i = 0; i < 3; i++) // run through the motions  3 times; retaining this from example code for testing purposes
         {
-            myservo.write(90);       // moving servo to 0°, as in example code, seems to be some strain on it... using 90 and 10 instead
+            myservo.write(90);       // moving servo to 0°, as in example code, seems to put some strain on it... using 90 and 10 instead
             digitalWrite(D7, HIGH); // flash the LED
             delay(100);             // wait 100 ms
             myservo.write(10);      // move servo to 10°
@@ -267,7 +264,7 @@ void loop(void)
     if(instruction == 1){
     
         
-        //checking if the flag is currently false so that it is set to true once and the corresponding message is send only once
+        //checking if the flag is currently false so that it is set to true once and the corresponding message is sent only once
         if(reachedReqTempState == FALSE && temperatureF > 100){
             reachedReqTempState = TRUE;
             reachedReqTempTime = millis();
